@@ -188,3 +188,15 @@ def view_loan(loan_id):
         return Response({"error": "Customer not found for the given loan."}, status=404)
     except Exception as e:
         return Response({"error": str(e)}, status=500)
+    
+
+@api_view(['GET'])
+def view_loans_by_customer_id(request, customer_id):
+    # Retrieve all loans for the given customer_id
+    loans = Loan.objects.filter(customer_id=customer_id)
+
+    # Serialize the loan data for the response
+    serializer = LoanSerializer(loans, many=True)
+
+    # Return the response with the serialized data
+    return Response(serializer.data)
