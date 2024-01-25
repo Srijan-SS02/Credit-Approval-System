@@ -156,3 +156,35 @@ def create_loan(request):
 
 
 
+@api_view(['GET'])
+def view_loan(loan_id):
+    try:
+        # Retrieve loan data
+        loan = Loan.objects.get(loan_id=loan_id)
+
+        # Retrieve customer data
+        customer = Customer.objects.get(customer_id=loan.customer_id)
+
+        # Serialize the loan and customer data for the response
+        loan_serializer = LoanSerializer(loan)
+        customer_serializer = CustomerSerializer(customer)
+
+        # Create the response body
+        response_body = {
+            "loan_id": loan_id,
+            "customer": customer_serializer.data,
+            "loan_approved": True,  # Assuming the loan is approved if it exists
+            "interest_rate": loan.interest_rate,
+            "monthly_installment": loan.monthly_repayment,
+            "tenure": loan.tenure
+        }
+
+        # Return the response with the created response body
+        return Response(response_body, status=200)
+
+    except Loan.DoesNotExist:
+        return Response({"error": "Loan not found."}, status=404)
+    except Customer.DoesNotExist:
+        return Response({"error": "Customer not found for the given loan."}, status=404)
+    except Exception as e:
+        return Response({"error": str(e)}, status=500)
