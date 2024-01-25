@@ -1,4 +1,4 @@
-def check_loan_eligibility(credit_score, interest_rate):
+def check_loan_eligibility(credit_score, existing_loans, interest_rate):
 
     if credit_score > 50:
         return True, interest_rate

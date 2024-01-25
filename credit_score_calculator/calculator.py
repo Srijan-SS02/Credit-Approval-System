@@ -25,7 +25,7 @@ def calculate_credit_score(existing_loans):
     credit_score -= total_approved_volume // 100000  # Deduct 1 point for every lakh of approved volume
 
     # 5. Current Loans vs. Approved Limit
-    current_loan_amount = sum(loan.loan_amount for loan in existing_loans)
+    current_loan_amount = existing_loans.aggregate(total_loan_amount=models.Sum('loan_amount'))['total_loan_amount'] or 0
     if existing_loans and current_loan_amount > existing_loans[0].customer.approved_limit:
         credit_score = 0  # Set credit score to 0 if current loans exceed the approved limit
 
