@@ -7,6 +7,6 @@ urlpatterns = [
     path('register/', register_customer, name='register_customer'),
     path('check-eligibility/', check_eligibility, name='check_eligibility'),
     path('create-loan/', create_loan,name='create_loan'),
-    path('view-loan/<str:loan_id>/', view_loan, name='view_loan' ),
-     path('view-loans/<str:customer_id>/', view_loans_by_customer_id, name='view_loans_by_customer_id'),
+    path('view-loan_loan_id/<str:loan_id>/', view_loan, name='view_loan'),
+    path('view-loan_customer_id/<str:customer_id>/', view_loans_by_customer_id, name='view_loans_by_customer_id'),
 ]

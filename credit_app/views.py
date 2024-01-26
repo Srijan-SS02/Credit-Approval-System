@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from datetime import date
-from .models import Customer, Loan
+from credit_app.models import Customer, Loan
 from .serializers import CustomerSerializer, LoanSerializer
 from credit_score_calculator.calculator import calculate_credit_score
 from credit_score_calculator.loan_eligibility import check_loan_eligibility
@@ -157,38 +157,34 @@ def create_loan(request):
 
 
 @api_view(['GET'])
-def view_loan(loan_id):
+def view_loan(request, loan_id):
     try:
-        # Retrieve loan data
-        loan = Loan.objects.get(loan_id=loan_id)
+        # Retrieve loans with the given loan_id
+        loans = Loan.objects.filter(loan_id=loan_id)
 
-        # Retrieve customer data
-        customer = Customer.objects.get(customer_id=loan.customer_id)
+        # Check if there are no loans
+        if not loans.exists():
+            return Response({"error": "No loans found with the given loan_id."}, status=404)
 
-        # Serialize the loan and customer data for the response
-        loan_serializer = LoanSerializer(loan)
-        customer_serializer = CustomerSerializer(customer)
+        # Serialize the loan data for all loans
+        loan_serializer = LoanSerializer(loans, many=True)
 
         # Create the response body
-        response_body = {
-            "loan_id": loan_id,
-            "customer": customer_serializer.data,
-            "loan_approved": True,  # Assuming the loan is approved if it exists
-            "interest_rate": loan.interest_rate,
-            "monthly_installment": loan.monthly_repayment,
-            "tenure": loan.tenure
-        }
+        response_body = []
+        for loan_data in loan_serializer.data:
+            response_body.append({
+                "loan_id": loan_data['loan_id'],
+                "loan_approved": True,  # Assuming the loan is approved if it exists
+                "interest_rate": loan_data['interest_rate'],
+                "monthly_installment": loan_data['monthly_repayment'],
+                "repayments_left": loan_data['tenure'] - loan_data['EMIs_paid_on_time']
+            })
 
         # Return the response with the created response body
         return Response(response_body, status=200)
 
-    except Loan.DoesNotExist:
-        return Response({"error": "Loan not found."}, status=404)
-    except Customer.DoesNotExist:
-        return Response({"error": "Customer not found for the given loan."}, status=404)
     except Exception as e:
         return Response({"error": str(e)}, status=500)
-    
 
 @api_view(['GET'])
 def view_loans_by_customer_id(request, customer_id):
