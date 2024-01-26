@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'credit_app',
     'whitenoise',
+    'credit_app.tests',
 ]
 
 MIDDLEWARE = [

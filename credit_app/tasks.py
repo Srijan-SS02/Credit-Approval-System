@@ -15,6 +15,6 @@ def import_customer_data():
 def import_loan_data():
     ImportLoanCommand().handle()
 
-@shared_task
-def add(x,y):
-    return x+y
+# @shared_task
+# def add(x,y):
+#     return x+y
