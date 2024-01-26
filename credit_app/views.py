@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from datetime import date
-from .models import Customer, Loan
+# from .models import Customer, Loan
 from .serializers import CustomerSerializer, LoanSerializer
 from credit_score_calculator.calculator import calculate_credit_score
 from credit_score_calculator.loan_eligibility import check_loan_eligibility
@@ -28,15 +28,15 @@ def register_customer(request):
         # Approved_limit calculation
         approved_limit = round(36 * float(monthly_income) / 100000) * 100000
 
-        # Create a new Customer object
-        customer = Customer.objects.create(
-            customer_id=customer_id,
-            first_name=first_name,
-            last_name=last_name,
-            monthly_salary=monthly_income,
-            approved_limit=approved_limit,
-            current_debt=0  # Assuming initial current_debt is 0
-        )
+        # # Create a new Customer object
+        # # customer = Customer.objects.create(
+        #     customer_id=customer_id,
+        #     first_name=first_name,
+        #     last_name=last_name,
+        #     monthly_salary=monthly_income,
+        #     approved_limit=approved_limit,
+        #     current_debt=0  # Assuming initial current_debt is 0
+        # )
 
         # Serialize the customer data for the response
         serializer = CustomerSerializer(customer)

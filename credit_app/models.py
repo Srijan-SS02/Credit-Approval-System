@@ -10,13 +10,14 @@ class Customer(models.Model):
     monthly_salary=models.FloatField(null=True, max_length=200)
     approved_limit=models.FloatField(null=True, max_length=200)
     current_debt=models.FloatField(null=True, max_length=200)
-    age=models.IntegerField(null=True),  
+    age=models.IntegerField(null=True)
 
 
 
 class Loan(models.Model):
+    id = models.AutoField(primary_key=True)
     customer_id=models.CharField(null=False, max_length=200)
-    loan_id=models.CharField(primary_key=True, max_length=200, unique=True)
+    loan_id=models.CharField(max_length=200)
     loan_amount=models.CharField(null=True, max_length=200)
     tenure=models.IntegerField(null=True)
     interest_rate=models.FloatField(null=True, max_length=200)
