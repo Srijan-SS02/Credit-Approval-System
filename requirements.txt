@@ -7,6 +7,7 @@ click==8.1.7
 click-didyoumean==0.3.0
 click-plugins==1.1.1
 click-repl==0.3.0
+decouple==0.0.7
 Django==5.0.1
 django-background-tasks==1.2.5
 django-compat==1.0.15
@@ -19,6 +20,7 @@ pandas==2.2.0
 prompt-toolkit==3.0.43
 psycopg2-binary==2.9.9
 python-dateutil==2.8.2
+python-dotenv==1.0.1
 pytz==2023.3.post1
 redis==5.0.1
 six==1.16.0

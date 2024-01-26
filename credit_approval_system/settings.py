@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,16 +88,29 @@ WSGI_APPLICATION = 'credit_approval_system.wsgi.application'
 # }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'credi_approval_system_db',
+#         'USER': 'admin',
+#         'PASSWORD': 'admin123@',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'credi_approval_system_db',
-        'USER': 'admin',
-        'PASSWORD': 'admin123@',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', ''),
     }
 }
+
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 # ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'localhost:8000']
 
