@@ -6,11 +6,12 @@ class Customer(models.Model):
     customer_id = models.CharField(primary_key=True, max_length=200, unique=True)
     first_name=models.CharField(null=True, max_length=200)
     last_name=models.CharField(null=True, max_length=200)
-    # age=models.IntegerField(null=True),  
     phone_number=models.CharField(null=True, max_length=200, help_text="Enter phone number")
     monthly_salary=models.FloatField(null=True, max_length=200)
     approved_limit=models.FloatField(null=True, max_length=200)
     current_debt=models.FloatField(null=True, max_length=200)
+    age=models.IntegerField(null=True),  
+
 
 
 class Loan(models.Model):
