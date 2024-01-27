@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+
 from pathlib import Path
 
 import os
@@ -44,6 +45,9 @@ INSTALLED_APPS = [
     'whitenoise',
     'credit_app.tests',
 ]
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -102,17 +106,17 @@ WSGI_APPLICATION = 'credit_approval_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT', ''),
+        'NAME': 'credi_approval_system_db',
+        'USER': 'admin',
+        'PASSWORD': 'admin123@',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
-DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+# DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'localhost:8000']
+# ALLOWED_HOSTS = ['*']
 
 
 # Password validation
