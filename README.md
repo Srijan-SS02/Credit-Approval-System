@@ -6,7 +6,7 @@
 - [Configuration](#configuration)
 - [Database Setup](#database-setup)
 - [Running the Application](#running-the-application)
-- [Features](#Features)
+- [Technology Used](#Technology Used)
 
 
 ## Getting Started
@@ -32,10 +32,14 @@
 - You can run the data either by doing `docker compose up`
 - or by manually running `python manage.py runserver`
 
-  ## Features
+  ## Technology Used
   - Django
   - REST
   - PostgreSQL
   - DOCKER  / Docker-compose
   - GithubAction
+  - Celery
+  - Rabitmq(message broker)
+  - DockerHub
+  - git
   
