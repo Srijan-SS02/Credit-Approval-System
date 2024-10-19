@@ -6,7 +6,7 @@
 - [Configuration](#configuration)
 - [Database Setup](#database-setup)
 - [Running the Application](#running-the-application)
-- [Technology Used](#Technology Used)
+- [Technology Used](#technology-used)
 
 
 ## Getting Started
